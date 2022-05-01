@@ -22,7 +22,7 @@ import { Subject } from 'rxjs';
       this.dataChanged$ = this.dataChangeSubject.asObservable();
     }
   
-    getUsers() {
+    getCountertops() {
       return new Promise(resolve => {
         this.http.get(this.baseURL+'/measuredcountertops').subscribe(data => {
           resolve(data);
@@ -31,45 +31,15 @@ import { Subject } from 'rxjs';
         });
       });
     }
-  
-    private extractData(res: Response){
-      let body = res;
-      return body || [];
+
+    addCountertop(data) {
+      return new Promise((resolve, reject) => {
+        this.http.post(this.baseURL+'/measurecountertops', JSON.stringify(data))
+          .subscribe(res => {
+            resolve(res);
+          }, (err) => {
+            reject(err);
+          });
+      });
     }
-  
-    private handleError(error: Response | any){
-      let errorMsg: string;
-      if (error instanceof Response) {
-        const err = error || '';
-        errorMsg = `${error.status} - ${error.statusText || ''} ${err}`;      
-      } else {
-        errorMsg = error.message ? error.message : error.toString();
-      }
-      console.error(errorMsg);
-      return Observable.throw(errorMsg);
-    }
-  
-    removeCountertop(id) {
-      this.http.delete(this.baseURL + "/api/countertops/"+ id).subscribe(res => {
-        this.countertops = res;
-        this.dataChangeSubject.next(true);
-      })
-   
-    }
-  
-    addNewCountertop(item) {
-      this.http.post(this.baseURL + "/api/countertops", item).subscribe(res => {
-        this.countertops = res;
-        this.dataChangeSubject.next(true);
-      })
-    }
-  
-    editCountertop(item, id) {
-     this.http.put(this.baseURL + "/api/countertops/"+ id, item).subscribe(res => {
-       this.countertops = res;
-       this.dataChangeSubject.next(true);
-     })
-  
-    }
-  
   }

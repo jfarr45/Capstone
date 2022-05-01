@@ -8,12 +8,8 @@
 
 <ion-content padding>
   
-  <h3 class="no-item" text-center *ngIf="loadCountertops().length === 0">
-    No countertops on the list!
-  </h3>
-
-  <ion-list>
-    <ion-item-sliding *ngFor="let countertop of loadCountertops(); let i = index">
+  <ion-list inset>
+    <ion-item-sliding *ngFor="let countertop of getCountertops()">
       <ion-item>
         <h2>{{countertop.unit_number}}</h2>
       </ion-item>
