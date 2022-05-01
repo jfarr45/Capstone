@@ -1,93 +1,87 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { MeasureServiceProvider } from '../../providers/measure-service/measure-service';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { MeasuredCountertopsServiceProvider } from '../../providers/measured-countertops-service/measured-countertops-service';
+import { FormControl, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html'
 })
-export class AboutPage implements OnInit {
-  dynamicForm: FormGroup;
-  submitted = false;
 
-  constructor(public navCtrl: NavController, public measureService: MeasureServiceProvider, private formBuilder: FormBuilder) {
-  }
+export class AboutPage {
 
-  ngOnInit() {
-    this.dynamicForm = this.formBuilder.group({
-      countertopStyle: [' ', Validators.required],
-      countertopMeasure: new FormArray([])
-    })
-  }
+  name = 'Angular';
 
-  get f() {return this.dynamicForm.controls}
-  get t() {return this.f.countertopMeasure as FormArray;}
-
-  onChangeCountertopType(e) {
-    const countertopStyle = e.target.value || 0;
-
-    if (this.t.value == "Straight") {
-        this.t.push(this.formBuilder.group({
-          unit_number: [' '],
-          back_length: [' ', Validators.required],
-          back_depth: [' ', Validators.required],
-      }))
-    } 
-    else if (countertopStyle == "L-Shape Left") {
-        this.t.push(this.formBuilder.group({
-          unit_number: [' '],
-          back_length: [' ', Validators.required],
-          back_depth: [' ', Validators.required],
-          left_length: [' ', Validators.required],
-          left_depth: [' ', Validators.required],
-        }))
-      }
-    else if (countertopStyle == "L-Shape Right") {
-        this.t.push(this.formBuilder.group({
-          unit_number: [' '],
-          back_length: [' ', Validators.required],
-          back_depth: [' ', Validators.required],
-          right_length: [' ', Validators.required],
-          right_depth: [' ', Validators.required],
-        }))
+  finishes:string[] =['Finish', 'Raw'];
+  endsplash:string[] =['Yes', 'No'];
+  countertop_types:string[] =['Straight', 'Lshape Left', 'Lshape Right', 'Ushape'];
+  
+    profileForm = new FormGroup({
+    unit_number :new FormControl(''),
+  
+    left_wall_length :new FormControl(''),
+    left_wall_depth :new FormControl(''),
+    back_wall_length :new FormControl(''),
+    back_wall_depth :new FormControl(''),
+    right_wall_length :new FormControl(''),
+    right_wall_depth :new FormControl(''),
+    left_finish :new FormControl(''),
+    left_endsplash :new FormControl(''),
+    right_finish :new FormControl(''),
+    right_endsplash :new FormControl(''),
+    });
+  
+    countertop = {
+      unit_number :'',
+      left_wall_length :'',
+      left_wall_depth :'',
+      back_wall_length :'',
+      back_wall_depth :'',
+      right_wall_length :'',
+      right_wall_depth :'',
+      left_finish :'',
+      left_endsplash :'',
+      right_finish :'',
+      right_endsplash :'',
     }
-    else if (countertopStyle == "U-Shape") {
-        this.t.push(this.formBuilder.group({
-          unit_number: [' '],
-          back_length: [' ', Validators.required],
-          back_depth: [' ', Validators.required],
-          left_length: [' ', Validators.required],
-          left_depth: [' ', Validators.required],
-          right_length: [' ', Validators.required],
-          right_depth: [' ', Validators.required],
-      }))
+  
+    constructor(private fb: FormBuilder, public dataService: MeasuredCountertopsServiceProvider) {
+      this.profileForm= new FormGroup({
+  
+        countertop_type:new FormControl(''),
+        unit_number :new FormControl(''),
+      
+        left_wall_length :new FormControl(''),
+        left_wall_depth :new FormControl(''),
+        back_wall_length :new FormControl(''),
+        back_wall_depth :new FormControl(''),
+        right_wall_length :new FormControl(''),
+        right_wall_depth :new FormControl(''),
+        left_finish :new FormControl(''),
+        left_endsplash :new FormControl(''),
+        right_finish :new FormControl(''),
+        right_endsplash :new FormControl(''),
+    
+      });
+
+      this.addCountertop();
     }
-  }
 
-  onSubmit() {
-    this.submitted = true;
-    if (this.dynamicForm.invalid) {
-      return;
+    onSubmit() {
+      // TODO: Use EventEmitter with form value
+      console.warn(this.profileForm.value);
     }
-    alert('Measure Submitted!')
-  }
 
-  onReset() {
-    this.submitted = false;
-    this.dynamicForm.reset();
-    this.t.reset();
+    addCountertop() {
+      this.dataService.addCountertop(this.countertop).then((result) => {
+        console.log(result);
+      }, (err) => {
+        console.log(err);
+      })
+      this.profileForm.reset();
+      alert("Countertop measured.")
+    }
+  
+  
   }
-
-  onClear() {
-    this.submitted = false;
-    this.t.reset();
-  }
-
-  onNewCountertop() {
-    this.submitted = true;
-    this.t.reset();
-    alert("Countertop measured.")
-  }
-}

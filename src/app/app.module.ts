@@ -15,6 +15,8 @@ import { MeasureServiceProvider } from '../providers/measure-service/measure-ser
 import { ReactiveFormsModule } from '@angular/forms';
 import { MeasuredCountertopsServiceProvider } from '../providers/measured-countertops-service/measured-countertops-service';
 
+import { HttpClientModule } from '@angular/common/http'
+
 @NgModule({
   declarations: [
     MyApp,
@@ -25,6 +27,7 @@ import { MeasuredCountertopsServiceProvider } from '../providers/measured-counte
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     ReactiveFormsModule,
   ],

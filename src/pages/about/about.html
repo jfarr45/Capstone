@@ -8,86 +8,174 @@
 
 <ion-content padding>
 
-  <form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
-    <div class="card m-3">
-      <h3 class="card-header">Countertop Information</h3>
-      <div class="card-body border-bottom">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Countertop Type</label>
-            <select formControlName="countertopStyle" class="form-control" (change)="onChangeCountertopType($event)">
-              <option value=""></option>
-              <option *ngFor="let i of ['Straight', 'L-Shape Left', 'L-Shape Right', 'U-Shape']">{{i}}</option>
-            </select>
-            <div *ngIf="submitted && f.countertopStyle.errors" class="invalid-feedback">
-              <div *ngIf="f.countertopStyle.errors.required">Countertop Type is required.</div>
-            </div>
-          </div>
-        </div>
-      </div>
+  
+<form [formGroup]="profileForm"(ngSubmit)="onSubmit()">
+  <h1>Measure Form</h1>
+  <div >
+  <label>
+    Unit Number:
+    <input type="text" formControlName="unit_number">
+  </label>
+  </div>
+  
+  <div>
+    <label>
+      Countertop Type:
+      <select id="Item" formControlName="countertop_type" required>
+        <option [ngValue]="null" [disabled]="true" >Choose one...</option>
+        <option *ngFor="let c of countertop_types" [ngValue]="c">{{ c }}</option>
+      </select>
+    </label>
+  </div>
+  
+  <div *ngIf="profileForm.get('countertop_type').value == 'Straight'">
+  <label>
+    Back Wall Length:
+    <input type="text" formControlName="back_wall_length" required>
+  </label>
+  </div>
+  <div *ngIf="profileForm.get('countertop_type').value == 'Straight'">
+  <label>
+    Back Wall Depth:
+    <input type="text" formControlName="back_wall_depth" required>
+  </label>
+  </div>
+  
+  <div *ngIf="profileForm.get('countertop_type').value == 'Lshape Left'">
+  <label>
+    Left Wall Length:
+    <input type="text" formControlName="left_wall_length" required>
+  </label>
+  </div>
+  <div *ngIf="profileForm.get('countertop_type').value == 'Lshape Left'">
+  <label>
+    Left Wall Depth:
+    <input type="text" formControlName="left_wall_depth" required>
+  </label>
+  </div>
+  <div *ngIf="profileForm.get('countertop_type').value == 'Lshape Left'">
+  <label>
+    Back Wall Length:
+    <input type="text" formControlName="back_wall_length" required>
+  </label>
+  </div>
+  <div *ngIf="profileForm.get('countertop_type').value == 'Lshape Left'">
+  <label>
+    Back Wall Depth:
+    <input type="text" formControlName="back_wall_depth" required>
+  </label>
+  </div>
+  
+  <div *ngIf="profileForm.get('countertop_type').value == 'Lshape Right'">
+  <label>
+    Back Wall Length:
+    <input type="text" formControlName="back_wall_length" required>
+  </label>
+  </div>
+  <div *ngIf="profileForm.get('countertop_type').value == 'Lshape Right'">
+  <label>
+    Back Wall Depth:
+    <input type="text" formControlName="back_wall_depth" required>
+  </label>
+  </div>
+  <div *ngIf="profileForm.get('countertop_type').value == 'Lshape Right'">
+  <label>
+    Right Wall Length:
+    <input type="text" formControlName="right_wall_length" required>
+  </label>
+  </div>
+  <div *ngIf="profileForm.get('countertop_type').value == 'Lshape Right'">
+  <label>
+    Right Wall Depth:
+    <input type="text" formControlName="right_wall_depth" required>
+  </label>
+  </div>
+  
+  <div *ngIf="profileForm.get('countertop_type').value == 'Ushape'">
+  <label>
+    Left Wall Length:
+    <input type="text" formControlName="left_wall_length" required>
+  </label>
+  </div>
+  <div *ngIf="profileForm.get('countertop_type').value == 'Ushape'">
+  <label>
+    Left Wall Depth:
+    <input type="text" formControlName="left_wall_depth" required>
+  </label>
+  </div>
+  <div *ngIf="profileForm.get('countertop_type').value == 'Ushape'">
+  <label>
+    Back Wall Length:
+    <input type="text" formControlName="back_wall_length" required>
+  </label>
+  </div>
+  <div *ngIf="profileForm.get('countertop_type').value == 'Ushape'">
+  <label>
+    Back Wall Depth:
+    <input type="text" formControlName="back_wall_depth" required>
+  </label>
+  </div>
+  <div *ngIf="profileForm.get('countertop_type').value == 'Ushape'">
+  <label>
+    Right Wall Length:
+    <input type="text" formControlName="right_wall_length" required>
+  </label>
+  </div>
+  <div *ngIf="profileForm.get('countertop_type').value == 'Ushape'">
+  <label>
+    Right Wall Depth:
+    <input type="text" formControlName="right_wall_depth" required>
+  </label>
+  </div>
+  
+  
+  <div>
+  <label>
+    Left End Finish:
+    <select id="Left Finish" formControlName="left_finish" required>
+      <option [ngValue]="null" [disabled]="true" >Choose one...</option>
+      <option *ngFor="let c of finishes" [ngValue]="c">{{ c }}</option>
+    </select>
+  </label>
+  </div>
+  <div>
+  <label>
+    Left End Splash:
+    <select id="Left Splash" formControlName="left_endsplash" required>
+     <option [ngValue]="null" [disabled]="true" >Choose one...</option>
+     <option *ngFor="let c of endsplash" [ngValue]="c">{{ c }}</option>
+  </select>
+  </label>
+  </div>
+  <div>
+  <label>
+    Right End Finish:
+    <select id="Right Finish" formControlName="right_finish" required>
+      <option [ngValue]="null" [disabled]="true" >Choose one...</option>
+      <option *ngFor="let c of finishes" [ngValue]="c">{{ c }}</option>
+    </select>
+  </label>
+  </div>
+  <div>
+  <label>
+    Right End Splash:
+    <select id="Right Splash" formControlName="right_endsplash" required>
+      <option [ngValue]="null" [disabled]="true" >Choose one...</option>
+      <option *ngFor="let c of endsplash" [ngValue]="c">{{ c }}</option>
+  </select>
+  </label>
+  </div>
+  
+  <div class="card-footer text-center border-top-0">
+    <button class="btn btn-primary mr-1" (click)="onNewCountertop()" [disabled]="!profileForm.valid">Add Countertop</button>
+    <a href="mailto:lescommercial@lesmith.com"><button class="btn btn-secondary" type="button" (click)="onSubmit()">Finish Job</button></a>
+  </div>
+  
+  
+</form>
 
-      <div *ngFor="let countertopMeasure of t.controls; let i = index" class="list-group list-group-flush">
-        <div class="list-group-item">
-          <h5 class="card-title">Dimensions:</h5>
-          <div [formGroup]="measure" class="form-row">
-            
-            <!--<div class="form-group col-6">
-              <label>Unit Number</label>
-              <input type="number" formControlName="unit_number" class="form-control"/>
-            </div>-->
-
-            <div class="form-group col-6">
-              <label>Left Wall Length</label>
-              <input type="number" formControlName="left_length" class="form-control" [ngClass]="{ 'is-invalid': submitted && countertopMeasure.controls.left_length.errors }"/>
-              <div *ngIf="submitted && countertopMeasure.controls.left_length.errors" class="invalid-feedback"></div>
-                <div *ngIf="countertopMeasure.controls.left_length.errors.required">Left wall length is required</div>
-              </div>
-            </div>
-
-            <div class="form-group col-6">
-              <label>Left Wall Depth</label>
-              <input type="number" formControlName="left_depth" class="form-control" [ngClass]="{ 'is-invalid': submitted && countertopMeasure.controls.left_depth.errors }"/>
-              <div *ngIf="submitted && countertopMeasure.controls.left_depth.errors" class="invalid-feedback"></div>
-                <div *ngIf="countertopMeasure.controls.left_depth.errors.required">Left wall depth is required</div>
-            </div>
-            </div>
-
-            <div class="form-group col-6">
-              <label>Back Wall Length</label>
-              <input type="number" formControlName="back_length" class="form-control" [ngClass]="{ 'is-invalid': submitted && countertopMeasure.controls.back_length.errors }"/>
-              <div *ngIf="submitted && countertopMeasure.controls.back_length.errors" class="invalid-feedback"></div>
-                <div *ngIf="countertopMeasure.controls.back_length.errors.required">Back wall length is required</div>
-            </div>
-            
-            <div class="form-group col-6">
-              <label>Back Wall Depth</label>
-              <input type="number" formControlName="back_depth" class="form-control" [ngClass]="{ 'is-invalid': submitted && countertopMeasure.controls.back_depth.errors }"/>
-              <div *ngIf="submitted && countertopMeasure.controls.back_depth.errors" class="invalid-feedback"></div>
-                <div *ngIf="countertopMeasure.controls.back_depth.errors.required">Back wall depth is required</div>
-            </div>
-
-            <div class="form-group col-6">
-              <label>Right Wall Length</label>
-              <input type="number" formControlName="right_length" class="form-control" [ngClass]="{ 'is-invalid': submitted && countertopMeasure.controls.right_length.errors }"/>
-              <div *ngIf="submitted && countertopMeasure.controls.right_length.errors" class="invalid-feedback"></div>
-                <div *ngIf="countertopMeasure.controls.right_length.errors.required">Right wall length is required</div>
-            </div>
-
-            <div class="form-group col-6">
-              <label>Right Wall Depth</label>
-              <input type="number" formControlName="right_depth" class="form-control" [ngClass]="{ 'is-invalid': submitted && countertopMeasure.controls.right_depth.errors }" />
-              <div *ngIf="submitted && countertopMeasure.controls.right_depth.errors" class="invalid-feedback"></div>
-                <div *ngIf="countertopMeasure.controls.right_depth.errors.required">Right wall depth is required</div>
-            </div>
-            
-            <div class="card-footer text-center border-top-0">
-              <button class="btn btn-primary mr-1" (click)="onNewCountertop()">Add Countertop</button>
-              <button class="btn btn-secondary mr-1" type="button" (click)="onClear()">Clear</button>
-              <button class="btn btn-secondary" type="button" (click)="onSubmit()">Finish Job</button>
-            </div>
-        </div>
-      </div>
-  </form>
-
+  <p>
+    Form Status: {{ profileForm.status }}
+  </p>
 
 </ion-content>

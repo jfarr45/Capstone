@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
@@ -10,23 +11,16 @@ import { MeasuredCountertopsServiceProvider } from '../../providers/measured-cou
 })
 export class ContactPage {
   title="Countertops Measured";
+  countertops: any;
 
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, public dataService: MeasuredCountertopsServiceProvider,) {
-
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, public dataService: MeasuredCountertopsServiceProvider, public http: HttpClient) {
+    this.getCountertops()
   }
 
-  loadCountertops() {
-    return this.dataService.getCountertops();
+  getCountertops() {
+    this.dataService.getCountertops()
+    .then(data => {
+      this.countertops = data;
+      console.log(this.countertops);
+    })}
   }
-
-  removeCountertops(countertop, index) {
-    console.log("Removing Countertop - ", countertop, index);
-    const toast = this.toastCtrl.create({
-      message: 'Removing Countertop - ' + index + " ...",
-      duration: 3000
-    });
-    toast.present();
-
-    this.dataService.removeCountertop(index);
-  }
-}
