@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/2c066211-7280-48a7-99bd-bbc049b51c77/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/countertopmeasuring",
+    "appService.deploySubpath": "."
+}

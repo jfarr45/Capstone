@@ -1,5 +1,5 @@
 {
-  "name": "Countertops",
+  "name": "countertops",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
@@ -36,6 +36,7 @@
     "express": "^4.17.3",
     "git": "^0.1.5",
     "heroku": "^7.60.2",
+    "ionic": "3.20.0",
     "ionic-angular": "3.9.9",
     "ionicons": "3.0.0",
     "loopback": "^3.28.0",
